@@ -29,12 +29,61 @@ foreach (var doc in resultat)
 {
     Console.WriteLine(doc + " \n");
 }
+AffichageMenu();
+void AffichageMenu()
+{
+    bool fermer = true;
+    while (!fermer)
+    {
+        Console.WriteLine("\nMenu :");
+        Console.WriteLine("1. Ajouter un livre");
+        Console.WriteLine("2. Ajouter un périodique");
+        Console.WriteLine("3. Ajouter une BD");
+        Console.WriteLine("4. Rechercher les périodiques (prix décroissant)");
+        Console.WriteLine("5. Rechercher une BD par dessinateur");
+        Console.WriteLine("6. Calculer le prix moyen d’un type d’ouvrage");
+        Console.WriteLine("7. Quitter");
+        Console.Write("Choisissez une option : ");
 
+        string choix = Console.ReadLine();
+        switch (choix)
+        {
+            case "1": AddBook(); break;
+            case "2": AddPeriodic(); break;
+            case "3": AddBD(); break;
+            case "4": //Function(); break;
+            case "5": //Function(); break;
+            case "6": //Function(); break;
+            case "7": return;
+            default: Console.WriteLine("Option invalide."); break;
+        }
+    }
+}
 
 #region Database Add function
 
-void AddBook(string titre, bool dispo, double prix, string[] exemplaires, int année, string édition, string auteur)
+void AddBook()
 {
+    Console.Write("Titre : ");
+    string titre = Console.ReadLine();
+    Console.Write("Disponible (1/0) : ");
+    bool dispo = Console.ReadLine() == "1";
+    Console.Write("Prix : ");
+    double prix = double.Parse(Console.ReadLine());
+    Console.Write("Année : ");
+    int année = int.Parse(Console.ReadLine());
+    Console.Write("Maison d'édition : ");
+    string édition = Console.ReadLine();
+    Console.Write("Auteur : ");
+    string auteur = Console.ReadLine();
+    Console.Write("Nombre d'exemplaires : ");
+    int nbExemplaires = int.Parse(Console.ReadLine());
+    string[] exemplaires = new string[nbExemplaires];
+    for (int i = 0; i < nbExemplaires; i++)
+    {
+        Console.Write($"Exemplaire {i + 1} : ");
+        exemplaires[i] = Console.ReadLine();
+    }
     var doc = new BsonDocument
     {
         {"titre",titre},
@@ -48,8 +97,18 @@ void AddBook(string titre, bool dispo, double prix, string[] exemplaires, int an
     TPLDoc.InsertOne(doc);
 }
 
-void AddPeriodic(string titre, bool dispo, double prix, string date, string périodicité) 
+void AddPeriodic() 
 {
+    Console.Write("Titre : ");
+    string titre = Console.ReadLine();
+    Console.Write("Disponible (1/0) : ");
+    bool dispo = Console.ReadLine() == "1";
+    Console.Write("Prix : ");
+    double prix = double.Parse(Console.ReadLine());
+    Console.Write("Date : ");
+    string date = Console.ReadLine();
+    Console.Write("Périodicité : ");
+    string périodicité = Console.ReadLine();
     var doc = new BsonDocument
     {
         {"titre",titre},
@@ -62,8 +121,22 @@ void AddPeriodic(string titre, bool dispo, double prix, string date, string pér
     TPLDoc.InsertOne(doc);
 }
 
-void AddBD(string titre, bool dispo, double prix, int année, string édition, string auteur,string dessinateur) 
+void AddBD() 
 {
+    Console.Write("Titre : ");
+    string titre = Console.ReadLine();
+    Console.Write("Disponible (1/0) : ");
+    bool dispo = Console.ReadLine() == "1";
+    Console.Write("Prix : ");
+    double prix = double.Parse(Console.ReadLine());
+    Console.Write("Année : ");
+    int année = int.Parse(Console.ReadLine());
+    Console.Write("Maison d'édition : ");
+    string édition = Console.ReadLine();
+    Console.Write("Auteur : ");
+    string auteur = Console.ReadLine();
+    Console.Write("Dessinateur : ");
+    string dessinateur = Console.ReadLine();
     var doc = new BsonDocument
     {
         {"titre",titre},
